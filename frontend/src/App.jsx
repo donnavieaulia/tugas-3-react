@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import ProductList from './components/ProductList';
+import SearchBar from './components/SearchBar';
 import initialProducts from './data/initialProducts';
 
 function App() {
   const [products] = useState(initialProducts);
+  const [search, setSearch] = useState('');
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.trim().toLowerCase())
+  );
 
   return (
     <main className="container">
@@ -15,10 +21,12 @@ function App() {
           </div>
         </header>
 
-        <ProductList products={products} onEdit={() => {}} onDelete={() => {}} />
+        <SearchBar value={search} onChange={setSearch} total={products.length} />
+
+        <ProductList products={filteredProducts} onEdit={() => {}} onDelete={() => {}} />
 
         <p className="footer-info">
-          Menampilkan {products.length} dari {products.length} produk
+          Menampilkan {filteredProducts.length} dari {products.length} produk
         </p>
       </section>
     </main>
