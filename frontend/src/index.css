@@ -235,6 +235,34 @@ body {
   margin-top: 20px;
 }
 
+/* Delete confirm */
+.delete-content {
+  text-align: center;
+}
+
+.delete-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: #fef2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.delete-preview {
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.delete-preview .product-price {
+  margin: 0;
+}
+
 /* Form */
 .form-id {
   margin: 0 0 8px;
