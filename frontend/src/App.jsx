@@ -8,6 +8,7 @@ function App() {
   const [products, setProducts] = useState(initialProducts);
   const [search, setSearch] = useState('');
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
 
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(search.trim().toLowerCase())
@@ -17,6 +18,15 @@ function App() {
     const nextId = products.length > 0 ? Math.max(...products.map((p) => p.id)) + 1 : 1;
     setProducts([...products, { id: nextId, ...data }]);
     setIsAddOpen(false);
+  };
+
+  const handleEdit = (data) => {
+    setProducts(
+      products.map((product) =>
+        product.id === editingProduct.id ? { ...product, ...data } : product
+      )
+    );
+    setEditingProduct(null);
   };
 
   return (
@@ -34,7 +44,7 @@ function App() {
 
         <SearchBar value={search} onChange={setSearch} total={products.length} />
 
-        <ProductList products={filteredProducts} onEdit={() => {}} onDelete={() => {}} />
+        <ProductList products={filteredProducts} onEdit={setEditingProduct} onDelete={() => {}} />
 
         <p className="footer-info">
           Menampilkan {filteredProducts.length} dari {products.length} produk
@@ -48,6 +58,18 @@ function App() {
           submitLabel="Simpan Produk"
           onSubmit={handleAdd}
           onClose={() => setIsAddOpen(false)}
+        />
+      )}
+
+      {editingProduct && (
+        <ProductFormModal
+          key={editingProduct.id}
+          title="Edit Produk"
+          description="Perbarui informasi produk yang dipilih."
+          submitLabel="Simpan Perubahan"
+          initialData={editingProduct}
+          onSubmit={handleEdit}
+          onClose={() => setEditingProduct(null)}
         />
       )}
     </main>
