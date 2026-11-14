@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ProductList from './components/ProductList';
 import SearchBar from './components/SearchBar';
 import ProductFormModal from './components/ProductFormModal';
+import DeleteConfirmModal from './components/DeleteConfirmModal';
 import initialProducts from './data/initialProducts';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [deletingProduct, setDeletingProduct] = useState(null);
 
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(search.trim().toLowerCase())
@@ -29,6 +31,11 @@ function App() {
     setEditingProduct(null);
   };
 
+  const handleDelete = (id) => {
+    setProducts(products.filter((product) => product.id !== id));
+    setDeletingProduct(null);
+  };
+
   return (
     <main className="container">
       <section className="panel">
@@ -44,7 +51,7 @@ function App() {
 
         <SearchBar value={search} onChange={setSearch} total={products.length} />
 
-        <ProductList products={filteredProducts} onEdit={setEditingProduct} onDelete={() => {}} />
+        <ProductList products={filteredProducts} onEdit={setEditingProduct} onDelete={setDeletingProduct} />
 
         <p className="footer-info">
           Menampilkan {filteredProducts.length} dari {products.length} produk
@@ -70,6 +77,14 @@ function App() {
           initialData={editingProduct}
           onSubmit={handleEdit}
           onClose={() => setEditingProduct(null)}
+        />
+      )}
+
+      {deletingProduct && (
+        <DeleteConfirmModal
+          product={deletingProduct}
+          onConfirm={handleDelete}
+          onClose={() => setDeletingProduct(null)}
         />
       )}
     </main>
