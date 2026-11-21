@@ -1,3 +1,4 @@
+@import "tailwindcss";
 * {
   box-sizing: border-box;
 }
@@ -13,7 +14,12 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family:
+    "Inter",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: #f1f5f9;
   color: #0f172a;
 }
@@ -57,7 +63,9 @@ body {
   font-weight: 600;
   cursor: pointer;
   border: 1px solid transparent;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .btn-primary {
