@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import formatRupiah from "../utils/formatRupiah";
 
 function ProductCard({ product, viewMode, onEdit, onDelete }) {
@@ -9,17 +10,21 @@ function ProductCard({ product, viewMode, onEdit, onDelete }) {
         isList ? "flex items-center justify-between gap-4" : ""
       }`}
     >
-      <div className={isList ? "min-w-0 flex-1" : ""}>
+      {/* Klik kartu -> buka halaman detail */}
+      <Link
+        to={`/products/${product.id}`}
+        className={isList ? "min-w-0 flex-1" : "block"}
+      >
         <span className="text-xs font-medium text-slate-400">
           ID: {product.id}
         </span>
-        <h3 className="truncate text-lg font-semibold text-slate-900">
+        <h3 className="truncate text-lg font-semibold text-slate-900 hover:text-emerald-600">
           {product.name}
         </h3>
         <p className="font-medium text-emerald-600">
           {formatRupiah(product.price)}
         </p>
-      </div>
+      </Link>
 
       <div className={`flex gap-2 ${isList ? "" : "mt-4"}`}>
         <button

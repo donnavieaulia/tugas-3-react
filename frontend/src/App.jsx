@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ProductListPage from "./pages/ProductListPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import initialProducts from "./data/initialProducts";
 
 function App() {
   const [products, setProducts] = useState(initialProducts);
-  const [viewMode] = useState("grid"); // toggle grid/list-nya nanti di Settings
+  const [viewMode] = useState("grid");
 
   const handleAdd = (data) => {
     const nextId =
@@ -38,6 +39,10 @@ function App() {
                 onDelete={handleDelete}
               />
             }
+          />
+          <Route
+            path="/products/:id"
+            element={<ProductDetailPage products={products} />}
           />
         </Routes>
       </main>
