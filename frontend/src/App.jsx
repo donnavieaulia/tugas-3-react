@@ -3,12 +3,13 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ProductListPage from "./pages/ProductListPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import SettingsPage from "./pages/SettingsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import initialProducts from "./data/initialProducts";
 
 function App() {
   const [products, setProducts] = useState(initialProducts);
-  const [viewMode] = useState("grid");
+  const [viewMode, setViewMode] = useState("grid"); // 'grid' | 'list'
 
   const handleAdd = (data) => {
     const nextId =
@@ -44,6 +45,15 @@ function App() {
           <Route
             path="/products/:id"
             element={<ProductDetailPage products={products} />}
+          />
+          <Route
+            path="/settings"
+            element={
+              <SettingsPage
+                viewMode={viewMode}
+                onChangeViewMode={setViewMode}
+              />
+            }
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
