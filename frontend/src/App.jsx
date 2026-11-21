@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ProductListPage from "./pages/ProductListPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import initialProducts from "./data/initialProducts";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
             path="/products/:id"
             element={<ProductDetailPage products={products} />}
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>
